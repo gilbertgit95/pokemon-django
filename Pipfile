@@ -10,6 +10,7 @@ pylint = "*"
 django = "==3.0"
 psycopg2 = "*"
 pokebase = "*"
+django-heroku = "*"
 
 [requires]
 python_version = "3.7"
