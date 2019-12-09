@@ -128,14 +128,14 @@
                 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    Are you sure you want to remove this pokemon forever? <br />
+                    Are you sure you want to remove <b>{{ pokemon.name }}</b> forever? <br />
                     Click delete to continue...
                 </div>
                 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <button id="delete_btn" name="{{ pokemon.name }}" type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
                 </div>
                 
             </div>

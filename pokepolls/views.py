@@ -136,3 +136,11 @@ class EditView(View):
         
 
         return redirect('/')
+
+    def delete(self, request, name):
+        try:
+            Pokemon.objects.filter(name=name).delete()
+        except:
+            pass
+
+        return HttpResponse(f'{ name } successfully deleted')
