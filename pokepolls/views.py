@@ -87,3 +87,52 @@ class AddView(View):
         
 
         return redirect('/')
+
+class EditView(View):
+    def get(self, request, name):
+        poke = serializers.serialize('json', Pokemon.objects.filter(name=name))
+        poke = json.loads(poke)[0]
+        poke = poke['fields']
+
+        poke['abilities'] = poke['abilities'].split(',')
+        poke['held_items'] = poke['held_items'].split(',')
+        poke['types'] = poke['types'].split(',')
+
+        poke['stats'] = poke['stats'].split(',')
+        poke['stats'] = [item.split(':') for item in poke['stats']]
+
+        back_path = f'/pokemons/{ name }/'
+        action = f'/pokemons/{ name }/edit'
+
+        return render(request, 'poke-form.html', {'pokemon': poke, 'back_path': back_path, 'action': action })
+
+
+    def post(self, request, name):
+        try:
+            nameForm = request.POST.get('name')
+            weight = request.POST.get('weight')
+            height = request.POST.get('height')
+            pokeid = request.POST.get('pokeid')
+            abilities = request.POST.get('abilities')
+            items = request.POST.get('items')
+            types = request.POST.get('types')
+            stats = request.POST.get('stats')
+            image = request.POST.get('image')
+
+            Pokemon.objects.filter(name=name).update(
+                poke_id=pokeid,
+                name=nameForm,
+                weight=weight,
+                height=height,
+                image=image,
+                held_items=items,
+                abilities=abilities,
+                types=types,
+                stats=stats
+            )
+
+        except:
+            console.log('Error saving the product')
+        
+
+        return redirect('/')

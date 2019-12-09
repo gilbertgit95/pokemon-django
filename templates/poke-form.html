@@ -22,6 +22,7 @@
                     <input type="text"
                         class="form-control"
                         id="name_form"
+                        value="{{ pokemon.name }}"
                         placeholder="">
                 </div>
             </div>
@@ -31,6 +32,7 @@
                     <input type="text"
                         class="form-control"
                         id="image_form"
+                        value="{{ pokemon.image }}"
                         placeholder="">
                 </div>
             </div>
@@ -41,6 +43,7 @@
                         style="width: 200px;"
                         class="form-control"
                         id="weight_form"
+                        value="{{ pokemon.weight }}"
                         placeholder="">
                 </div>
             </div>
@@ -51,6 +54,7 @@
                         style="width: 200px;"
                         class="form-control"
                         id="height_form"
+                        value="{{ pokemon.height }}"
                         placeholder="">
                 </div>
             </div>
@@ -61,6 +65,7 @@
                         style="width: 200px;"
                         class="form-control"
                         id="pokeid_form"
+                        value="{{ pokemon.poke_id }}"
                         placeholder="">
                 </div>
             </div>
@@ -81,6 +86,7 @@
                                     {% for ability in pokemon.abilities %}
                                         <span class="btn ability-value" style="border: 1px solid #d77a2e;">
                                             <input class="from-control"
+                                                value="{{ ability }}"
                                                 placeholder="Enter Value"
                                                 style="width: 100px;
                                                         border: none;
@@ -114,6 +120,7 @@
                                     {% for item in pokemon.held_items %}
                                         <span class="btn item-value" style="border: 1px solid #d77a2e;">
                                             <input class="from-control"
+                                                value="{{ item }}"
                                                 placeholder="Enter Value"
                                                 style="width: 100px;
                                                         border: none;
@@ -147,6 +154,7 @@
                                     {% for type in pokemon.types %}
                                         <span class="btn type-value" style="border: 1px solid #d77a2e;">
                                             <input class="from-control"
+                                                value="{{ type }}"
                                                 placeholder="Enter Value"
                                                 style="width: 100px;
                                                         border: none;
