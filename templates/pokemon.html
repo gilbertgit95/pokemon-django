@@ -5,6 +5,20 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
+                <div style="margin-top: 40px; font-size: 18pt;">
+                    <a href="/" class="btn">
+                        <i class="fa fa-angle-left"></i>
+                        <span>Back</span>
+                    </a>
+                    <a href="/{{ pokemon.name }}/edit" class="btn btn-warning">
+                        <i class="fa fa-edit"></i>
+                        <span>Edit</span>
+                    </a>
+                    <button class="btn btn-danger" data-toggle="modal" data-target="#confirm_modal">
+                        <i class="fa fa-trash"></i>
+                        <span>Delete</span>
+                    </button>
+                </div>
                 <div class="jumbotron"
                      style="margin-top: 40px; background-image: url({% static 'assets/wallpaper.jpg' %});">
                     <div class="row">
@@ -33,20 +47,6 @@
                             </table>
                         </div>
                     </div>
-                </div>
-                <div style="margin-top: 40px; font-size: 18pt;">
-                    <a href="/" class="btn btn-info">
-                        <i class="fa fa-angle-left"></i>
-                        <span>Back</span>
-                    </a>
-                    <a href="/{{ pokemon.name }}/edit" class="btn btn-warning">
-                        <i class="fa fa-edit"></i>
-                        <span>Edit</span>
-                    </a>
-                    <button class="btn btn-danger" data-toggle="modal" data-target="#confirm_modal">
-                        <i class="fa fa-trash"></i>
-                        <span>Delete</span>
-                    </button>
                 </div>
             </div>
             <div class="col-md-6">
