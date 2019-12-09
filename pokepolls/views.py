@@ -120,7 +120,7 @@ class EditView(View):
             image = request.POST.get('image')
 
             Pokemon.objects.filter(name=name).update(
-                poke_id=pokeid,
+                # poke_id=pokeid,
                 name=nameForm,
                 weight=weight,
                 height=height,
