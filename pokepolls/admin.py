@@ -14,4 +14,8 @@ class PokemonAdmin(UserAdmin):
     fieldsets = ()
 
 # Register your models here.
+admin.site.site_header = "Pokedex Admin"
+admin.site.site_title = "Pokedex Portal"
+admin.site.index_title = "Welcome to Pokedex Portal"
+
 admin.site.register(Pokemon, PokemonAdmin)

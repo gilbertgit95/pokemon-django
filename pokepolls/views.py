@@ -84,7 +84,6 @@ class AddView(View):
 
         except:
             console.log('Error saving the product')
-        
 
         return redirect('/')
 
