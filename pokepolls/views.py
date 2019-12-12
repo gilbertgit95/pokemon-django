@@ -69,7 +69,7 @@ class AddView(View):
             stats = request.POST.get('stats')
             image = request.POST.get('image')
 
-            pokemon = Pokemon(
+            Pokemon.save(
                 poke_id=pokeid,
                 name=name,
                 weight=weight,
@@ -80,7 +80,6 @@ class AddView(View):
                 types=types,
                 stats=stats
             )
-            pokemon.save()
 
         except:
             console.log('Error saving the product')

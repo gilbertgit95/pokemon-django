@@ -19,3 +19,23 @@ class Pokemon(models.Model):
 
     class Meta:
         verbose_name_plural = 'Pokemon'
+
+    def save(self, data):
+        # required fields
+        # poki_id
+
+        if (data['poke_id']):
+            pokemon = Pokemon(
+                poke_id= data['poke_id'],
+                name= data['name'],
+                weight= data['weight'],
+                height= data['height'],
+                image= data['image'],
+                held_items= data['items'],
+                abilities= data['abilities'],
+                types= data['types'],
+                stats= data['stats']
+            )
+            pokemon.save()
+        else:
+            raise RequiredDataError('poke_id is required.')
