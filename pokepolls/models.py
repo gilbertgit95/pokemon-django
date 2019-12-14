@@ -4,7 +4,7 @@ from django.db import models
 class Pokemon(models.Model):
 
     poke_id = models.PositiveIntegerField()
-    evolution = models.CharField(max_length=20)
+    evolution = models.CharField(max_length=200)
     name = models.CharField(max_length=50)
     height = models.FloatField()
     weight = models.FloatField()

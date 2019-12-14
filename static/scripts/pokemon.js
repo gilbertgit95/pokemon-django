@@ -35,4 +35,6 @@ $(document).ready(() => {
             console.log(e)
         })
     })
+
+    $('[data-toggle="tooltip"]').tooltip();
 })

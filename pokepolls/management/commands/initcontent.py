@@ -9,6 +9,28 @@ BASE_API = 'https://pokeapi.co/api/v2'
 # from polls.models import Question as Poll
 # https://pokeapi.co/api/v2/generation/1/
 
+def getEvolution(id):
+    try:
+        species = requests.get(f'{ BASE_API }/pokemon-species/{ id }/')
+        species = species.json()
+        evol = requests.get(species['evolution_chain']['url'])
+        evol = evol.json()
+
+        chain = []
+
+        chainSpecies = evol['chain']
+
+        while chainSpecies:
+            chain.append(chainSpecies['species']['name'])
+            if chainSpecies['evolves_to'] and len(chainSpecies['evolves_to']):
+                chainSpecies = chainSpecies['evolves_to'][0]
+            else:
+                chainSpecies = None
+
+        return chain
+    except:
+        return []
+
 class Command(BaseCommand):
     help = 'Closes the specified poll for voting'
 
@@ -31,6 +53,7 @@ class Command(BaseCommand):
                 try:
                     # initiate variables
                     poke_id = int(re.split('\/', poke['url'])[-2])
+                    evolution = '' #[]
                     name = ''
                     height = ''
                     weight = ''
@@ -50,7 +73,10 @@ class Command(BaseCommand):
                     weight = pokemon['weight']
                     image = pokemon['sprites']['front_default']
 
+                    evolution = getEvolution(poke_id)
+
                     # stringified list of information
+                    evolution = ','.join(evolution)
                     held_items = ','.join(d['item']['name'] for d in pokemon['held_items'])
                     abilities = ','.join(d['ability']['name'] for d in pokemon['abilities'])
                     types = ','.join(d['type']['name'] for d in pokemon['types'])
@@ -58,6 +84,7 @@ class Command(BaseCommand):
 
                     pokemons.append({
                         'poke_id': poke_id,
+                        'evolution': evolution,
                         'name': name,
                         'height': height,
                         'weight': weight,
@@ -84,6 +111,7 @@ class Command(BaseCommand):
             for poke in pokemons:
                 poke_objs.append(Pokemon(
                     poke_id=    poke['poke_id'],
+                    evolution=  poke['evolution'],
                     name=       poke['name'],
                     height=     poke['height'],
                     weight=     poke['weight'],

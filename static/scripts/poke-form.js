@@ -26,12 +26,24 @@ $(document).ready(() => {
     let heightForm = $('#height_form')
     let pokeidForm = $('#pokeid_form')
 
+    let evolutionAddBtn = $('#evolution_add')
     let abilityAddBtn = $('#ability_add')
     let itemAddBtn = $('#item_add')
     let typeAddBtn = $('#type_add')
 
     let saveBtn = $('#save_btn')
     let submitForm = $('#submit_form')
+
+    evolutionAddBtn.find('button').click(() => {
+        let inp = evolutionAddBtn.find('input')
+        let val = inp.val()
+
+        if (val && val.length) {
+            let el = createListElement(val, 'evolution')
+            $(el).insertBefore(evolutionAddBtn)
+            inp.val('')
+        }
+    })
 
     abilityAddBtn.find('button').click(() => {
         let inp = abilityAddBtn.find('input')
@@ -67,6 +79,7 @@ $(document).ready(() => {
     })
 
     saveBtn.click(() => {
+        let evolutionForm = $('.evolution-value')
         let abilitiesForm = $('.ability-value')
         let heldItemsForm = $('.item-value')
         let typesForm = $('.type-value')
@@ -77,11 +90,15 @@ $(document).ready(() => {
         let weight = weigthForm.val()
         let height = heightForm.val()
         let pokeid = pokeidForm.val()
+        let evolution = []
         let abilities = []
         let items = []
         let types = []
         let stats = []
-        
+
+        evolutionForm.each((e, el) => {
+            evolution.push($(el).find('input').val())
+        })
         abilitiesForm.each((e, el) => {
             abilities.push($(el).find('input').val())
         })
@@ -100,6 +117,7 @@ $(document).ready(() => {
             stats.push(`${ td }:${ baseStat }:${ effort }`)
         })
 
+        evolution = evolution.join(',')
         abilities = abilities.join(',')
         items = items.join(',')
         types = types.join(',')
@@ -116,6 +134,7 @@ $(document).ready(() => {
         inputs[6].value = items
         inputs[7].value = types
         inputs[8].value = stats
+        inputs[8].value = evolution
 
         submitForm.find('button').click()
     })

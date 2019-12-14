@@ -29,6 +29,23 @@ class DetailView(View):
         poke['stats'] = poke['stats'].split(',')
         poke['stats'] = [item.split(':') for item in poke['stats']]
 
+        # add details for evolution
+        poke['evolution_details'] = []
+        evolPokes = poke['evolution'].split(',')
+        for evolPoke in evolPokes:
+            try:
+                pokeData = serializers.serialize('json', Pokemon.objects.filter(name=evolPoke))
+                pokeData = json.loads(pokeData)[0]
+                pokeData = pokeData['fields']
+                is_owner = False
+                print(f"{ poke['name'] } == { pokeData['name'] }")
+                if poke['name'] == pokeData['name']:
+                    is_owner = True
+
+                poke['evolution_details'].append({'name': evolPoke, 'detail': pokeData, 'is_owner': is_owner})
+            except:
+                poke['evolution_details'].append({'name': evolPoke, 'detail': None})
+
         return render(request, 'pokemon.html', {'pokemon': poke})
 
 class AddView(View):
@@ -38,6 +55,7 @@ class AddView(View):
         poke['weight'] = 0
         poke['height'] = 0
         poke['image'] = ''
+        poke['evolution'] = []
         poke['abilities'] = []
         poke['held_items'] = []
         poke['types'] = []
