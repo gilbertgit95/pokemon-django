@@ -69,8 +69,9 @@ class AddView(View):
             stats = request.POST.get('stats')
             image = request.POST.get('image')
 
-            Pokemon.save(
+            poke = Pokemon(
                 poke_id=pokeid,
+                evolution= '',
                 name=name,
                 weight=weight,
                 height=height,
@@ -80,9 +81,10 @@ class AddView(View):
                 types=types,
                 stats=stats
             )
+            poke.save()
 
         except:
-            console.log('Error saving the product')
+            print('Error saving the product')
 
         return redirect('/')
 
@@ -92,6 +94,7 @@ class EditView(View):
         poke = json.loads(poke)[0]
         poke = poke['fields']
 
+        poke['evolution'] = poke['evolution'].split(',')
         poke['abilities'] = poke['abilities'].split(',')
         poke['held_items'] = poke['held_items'].split(',')
         poke['types'] = poke['types'].split(',')
