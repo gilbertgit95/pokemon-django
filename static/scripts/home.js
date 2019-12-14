@@ -1,4 +1,6 @@
+
 $(document).ready(() => {
+    let downloadBtn = $('#download_btn')
     let addBtn = $('#add_btn')
     let searchBox = $('#search_key')
     let pokeBoxes = $('.pokemon-box-container')
@@ -28,5 +30,27 @@ $(document).ready(() => {
     pokeBoxes.click((e) => {
         name = e.currentTarget.title
         location.href =  `${ baseURL }/pokemons/${ name }`
+    })
+
+    let downloadOptions = ['name', 'poke_id', 'date_created'];
+    $('.dropdown-menu a').on( 'click', ( event ) => {
+        let $target = $( event.currentTarget ),
+            val = $target.attr( 'data-value' ),
+            $inp = $target.find( 'input' ),
+            idx;
+        if ( ( idx = downloadOptions.indexOf( val ) ) > -1 ) {
+            downloadOptions.splice( idx, 1 );
+            setTimeout(() => { $inp.prop( 'checked', false ) }, 0);
+        } else {
+            downloadOptions.push( val );
+            setTimeout(() => { $inp.prop( 'checked', true ) }, 0);
+        }
+        $( event.target ).blur();
+        return false;
+    });
+
+    downloadBtn.click(() => {
+        let url = `${ window.origin }/download?fields=${ downloadOptions.join('-') }`
+        window.open(url, "_blank"); 
     })
 })

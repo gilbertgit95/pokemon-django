@@ -4,6 +4,7 @@ from django.core import serializers
 from django.views import View
 from .models import Pokemon
 import re
+import csv
 import json
 
 def get_name_from_url(path):
@@ -163,3 +164,78 @@ class EditView(View):
             pass
 
         return HttpResponse(f'{ name } successfully deleted')
+
+class Download(View):
+    def get(self, request):
+        # pokemons = serializers.serialize('json', Pokemon.objects.all())
+        # pokemons = json.loads(pokemons)
+
+        fields = request.GET.get('fields')
+        fields = fields.split('-')
+
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="pokemons.csv"'
+
+        writer = csv.writer(response)
+        
+        orderfields = [
+            'name',
+            'created',
+            'poke_id',
+            'height',
+            'weight',
+            'image',
+            'abilities',
+            'held_items',
+            'evolution',
+            'types',
+            'stats'
+        ]
+        orderfieldsMap = {
+            'name': 'Name',
+            'created': 'Date Created',
+            'poke_id': 'Pokemon ID',
+            'height': 'Height',
+            'weight' : 'Weight',
+            'image': 'Image URL',
+            'abilities': 'Abilities',
+            'held_items': 'Held Items',
+            'evolution': 'Evolution',
+            'types': 'Types',
+            'stats': 'Statistics'
+        }
+
+        pokemons = Pokemon.objects.all().values(
+            'name',
+            'created',
+            'poke_id',
+            'height',
+            'weight',
+            'image',
+            'abilities',
+            'held_items',
+            'evolution',
+            'types',
+            'stats'
+        )
+
+        #writing header
+        row = []
+
+        for col in orderfields:
+            if col in fields:
+                row.append(orderfieldsMap[col])
+
+        writer.writerow(row)
+
+        # writing contents
+        for poke in pokemons:
+            row = []
+
+            for col in orderfields:
+                if col in fields:
+                    row.append(poke[col])
+
+            writer.writerow(row)
+
+        return response

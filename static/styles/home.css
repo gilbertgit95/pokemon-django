@@ -30,3 +30,16 @@
 .controls {
     margin-bottom: 40px;
 }
+
+ul li a {
+    text-decoration: none;
+    color: #333;
+    padding: 10px;
+    padding-left: 20px;
+    width: 100%;
+    outline: none;
+}
+
+ul li a:hover {
+    text-decoration: none;
+}

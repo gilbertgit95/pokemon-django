@@ -22,7 +22,29 @@
                     id="search_key"
                     placeholder="Search by name">
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
+                <div class="button-group" style="text-align: right;">
+                    <button type="button" class="btn btn-info" data-toggle="dropdown"><span class="fa fa-file-download"></span> Set Download Fields</button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" class="" data-value="name" tabIndex="-1"><input type="checkbox" checked/>&nbsp;Name</a></li>
+                        <li><a href="#" class="" data-value="created" tabIndex="-1"><input type="checkbox" checked/>&nbsp;Date Created</a></li>
+                        <li><a href="#" class="" data-value="poke_id" tabIndex="-1"><input type="checkbox" checked/>&nbsp;Poke ID</a></li>
+                        <li><a href="#" class="" data-value="height" tabIndex="-1"><input type="checkbox"/>&nbsp;Height</a></li>
+                        <li><a href="#" class="" data-value="weight" tabIndex="-1"><input type="checkbox"/>&nbsp;Weight</a></li>
+                        <li><a href="#" class="" data-value="image" tabIndex="-1"><input type="checkbox"/>&nbsp;Image</a></li>
+                        <li><a href="#" class="" data-value="abilities" tabIndex="-1"><input type="checkbox"/>&nbsp;Abilities</a></li>
+                        <li><a href="#" class="" data-value="held_items" tabIndex="-1"><input type="checkbox"/>&nbsp;Held Items</a></li>
+                        <li><a href="#" class="" data-value="evolution" tabIndex="-1"><input type="checkbox"/>&nbsp;Evolution</a></li>
+                        <li><a href="#" class="" data-value="types" tabIndex="-1"><input type="checkbox"/>&nbsp;Types</a></li>
+                        <li><a href="#" class="" data-value="stats" tabIndex="-1"><input type="checkbox"/>&nbsp;Statistics</a></li>
+                        <div class="dropdown-divider"></div>
+                        <button class="btn btn-info" id="download_btn" style="margin-left: 20px;">
+                            Download
+                        </button>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
                 <div style="text-align: right;">
                     <button type="button"
                             id="add_btn"
