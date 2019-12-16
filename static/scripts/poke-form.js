@@ -134,7 +134,7 @@ $(document).ready(() => {
         inputs[6].value = items
         inputs[7].value = types
         inputs[8].value = stats
-        inputs[8].value = evolution
+        inputs[9].value = evolution
 
         submitForm.find('button').click()
     })

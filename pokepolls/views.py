@@ -82,6 +82,7 @@ class AddView(View):
             weight = request.POST.get('weight')
             height = request.POST.get('height')
             pokeid = request.POST.get('pokeid')
+            evolution = request.POST.get('evolution')
             abilities = request.POST.get('abilities')
             items = request.POST.get('items')
             types = request.POST.get('types')
@@ -90,7 +91,7 @@ class AddView(View):
 
             poke = Pokemon(
                 poke_id=pokeid,
-                evolution= '',
+                evolution=evolution,
                 name=name,
                 weight=weight,
                 height=height,
@@ -133,6 +134,7 @@ class EditView(View):
             weight = request.POST.get('weight')
             height = request.POST.get('height')
             pokeid = request.POST.get('pokeid')
+            evolution = request.POST.get('evolution')
             abilities = request.POST.get('abilities')
             items = request.POST.get('items')
             types = request.POST.get('types')
@@ -146,6 +148,7 @@ class EditView(View):
                 height=height,
                 image=image,
                 held_items=items,
+                evolution=evolution,
                 abilities=abilities,
                 types=types,
                 stats=stats
