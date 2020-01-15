@@ -5,8 +5,7 @@ import re
 
 from pokepolls.models import Pokemon
 
-BASE_API = 'https://pokeapi.co/api/v2'
-# from polls.models import Question as Poll
+BASE_API = 'https://pokeapi.co/api/v2' # from polls.models import Question as Poll
 # https://pokeapi.co/api/v2/generation/1/
 
 def getEvolution(id):
