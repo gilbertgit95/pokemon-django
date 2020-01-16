@@ -99,7 +99,7 @@ class PokeTypes(models.Model):
     pokemon = models.ForeignKey(Pokemon, on_delete=models.CASCADE)
     type = models.ForeignKey(Types, on_delete=models.CASCADE)
     order = models.PositiveIntegerField()
-    
+
     class meta:
         verbose_name_plural = 'PokeTypes'
 
