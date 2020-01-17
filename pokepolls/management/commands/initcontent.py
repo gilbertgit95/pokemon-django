@@ -80,7 +80,7 @@ class Command(BaseCommand):
             pokeInfo = pokeInfo['pokemon_species']
 
             # temporary for testing
-            pokeInfo = pokeInfo[0:10]
+            pokeInfo = pokeInfo[0:1]
 
             for poke in pokeInfo:
                 # request information of a particular pokemon
@@ -134,16 +134,16 @@ class Command(BaseCommand):
                         held_items_coll.add(i)
 
                     pokemons.append({
-                        'poke_id': poke_id,
-                        'evolution': evolution,
-                        'name': name,
-                        'height': height,
-                        'weight': weight,
-                        'image': image,
+                        'poke_id':    poke_id,
+                        'evolution':  evolution,
+                        'name':       name,
+                        'height':     height,
+                        'weight':     weight,
+                        'image':      image,
                         'held_items': held_items,
-                        'abilities': abilities,
-                        'types': types,
-                        'stats': stats
+                        'abilities':  abilities,
+                        'types':      types,
+                        'stats':      stats
                     })
                     time.sleep(0.5)
 
@@ -209,6 +209,7 @@ class Command(BaseCommand):
                 abilities_data = []
                 types_data = []
                 evolutions_data = []
+                stats_data = []
 
                 for info in range(len(poke['held_items'])):
                     held_items_data.append(PokeHeldItems(
@@ -238,10 +239,19 @@ class Command(BaseCommand):
                         order=info
                     ))
 
+                for info in range(len(poke['stats'])):
+                    stats_data.append(PokeStats(
+                        pokemon=pokemon_data,
+                        name=poke['stats'][info]['stat']['name'],
+                        baseStat=poke['stats'][info]['base_stat'],
+                        effort=poke['stats'][info]['effort']
+                    ))
+
                 PokeHeldItems.objects.bulk_create(held_items_data)
                 PokeAbilities.objects.bulk_create(abilities_data)
                 PokeTypes.objects.bulk_create(types_data)
                 PokeEvolutions.objects.bulk_create(evolutions_data)
+                PokeStats.objects.bulk_create(stats_data)
 
 
             self.stdout.write('  +-> Done')

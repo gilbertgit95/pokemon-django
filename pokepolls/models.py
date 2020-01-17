@@ -51,18 +51,10 @@ class Types(models.Model):
 
 # the statistics of a pokemon
 class PokeStats(models.Model):
-    STAT_TYPES = (
-        ('b', 'base-stat'),
-        ('e', 'effort')
-    )
     pokemon = models.ForeignKey(Pokemon, on_delete=models.CASCADE)
-    stat_type = models.CharField(max_length=1, choices=STAT_TYPES)
-    speed = models.FloatField()
-    special_defence = models.FloatField()
-    special_attack = models.FloatField()
-    defence = models.FloatField()
-    attack = models.FloatField()
-    hp = models.FloatField()
+    baseStat = models.FloatField(default=0)
+    effort = models.FloatField(default=0)
+    name = models.CharField(max_length=20,default='')
 
     class Meta:
         verbose_name_plural = 'PokeStats'
